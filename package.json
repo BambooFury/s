@@ -1,0 +1,17 @@
+{
+  "name": "cs2-steam-skin-proxy",
+  "version": "1.0.0",
+  "description": "Node.js proxy for CS2 skin profitability data using csgobackpack.net",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["csgo", "cs2", "steam", "proxy", "skins"],
+  "author": "your-name",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7"
+  }
+}
