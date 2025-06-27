@@ -7,13 +7,23 @@ app.use(cors());
 
 app.get('/skins', async (req, res) => {
   try {
-    const response = await fetch('https://csgobackpack.net/api/GetItemsList/v2/?appid=730');
-    const data = await response.json();
+    const result = [
+      {
+        name: "Test Skin",
+        average_price: 100,
+        lowest_price: 120,
+        steam_cut_price: 87,
+        profit: 33,
+        icon: "https://via.placeholder.com/300x100?text=SKIN"
+      }
+    ];
+    res.json({ count: result.length, items: result });
+  } catch (err) {
+    console.error("🔥 Ошибка прокси:", err);
+    res.status(500).json({ error: "Test mode failed" });
+  }
+});
 
-    if (!data || !data.items_list) {
-      console.error("❌ API ответ не содержит items_list");
-      return res.status(500).json({ error: "Invalid API response from csgobackpack" });
-    }
 
     const result = [];
 
