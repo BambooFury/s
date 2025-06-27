@@ -1,7 +1,8 @@
 const express = require('express');
+const fetch = require('node-fetch');
 const cors = require('cors');
-const app = express();
 
+const app = express();
 app.use(cors());
 
 app.get('/skins', async (req, res) => {
@@ -10,8 +11,8 @@ app.get('/skins', async (req, res) => {
     const data = await response.json();
 
     if (!data || !data.items_list) {
-      console.error("❌ API ответ не содержит items_list");
-      return res.status(500).json({ error: "Invalid API response from csgobackpack" });
+      console.error("❌ API не содержит items_list");
+      return res.status(500).json({ error: "Invalid API response" });
     }
 
     const result = [];
@@ -43,12 +44,12 @@ app.get('/skins', async (req, res) => {
     res.json({ count: result.length, items: result });
 
   } catch (err) {
-    console.error("🔥 Ошибка прокси:", err);
+    console.error("🔥 Ошибка:", err.message || err);
     res.status(500).json({ error: "Failed to fetch or process data" });
   }
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Proxy server running on port ${PORT}`);
+  console.log(`✅ Сервер запущен на порту ${PORT}`);
 });
